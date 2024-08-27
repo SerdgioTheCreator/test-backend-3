@@ -12,21 +12,15 @@ class CustomUserSerializer(UserSerializer):
 
     class Meta:
         model = User
+        fields = (
+            'id',
+            'username',
+            'email',
+        )
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     """Сериализатор подписки."""
-
-    def create(self, validated_data):
-        """Создание новой подписки."""
-        return Subscription.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        """Обновление существующей подписки."""
-        instance.user = validated_data.get('user', instance.user)
-        instance.course = validated_data.get('course', instance.course)
-        instance.save()
-        return instance
 
     # TODO
 
